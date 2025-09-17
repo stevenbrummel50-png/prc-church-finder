@@ -72,8 +72,8 @@ async function findChurches() {
       distance: getDistance(userLat, userLng, ch.lat, ch.lng)
     })).sort((a, b) => a.distance - b.distance);
 
-    document.getElementById("results").innerHTML = sorted.slice(0, 3)
-  .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a></li>`)
+document.getElementById("results").innerHTML = sorted.slice(0, 3)
+  .map(ch => `<h2><a href="${ch.link}" target="_blank">${ch.name}</a></h2>`)
   .join("");
   } catch (err) {
     console.error("Error:", err);
