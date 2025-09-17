@@ -73,8 +73,8 @@ async function findChurches() {
     })).sort((a, b) => a.distance - b.distance);
 
     document.getElementById("results").innerHTML = sorted.slice(0, 3)
-      .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a> — ${ch.distance.toFixed(1)} miles</li>`)
-      .join("");
+  .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a></li>`)
+  .join("");
   } catch (err) {
     console.error("Error:", err);
     alert("Error finding location.");
