@@ -28,45 +28,57 @@ const churches = [
   { name: "Zion PRC", lat: 42.90629327, lng: -85.81239838, link: "https://www.prca.org/churches-missions/zion-prc" }
 ];
 
+// LocationIQ API key
+const LOCATIONIQ_KEY = "pk.a421fb4f7cdb6c8f8cb0bbf90f92aba4";
+
 // Haversine formula for distance (miles)
 function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 3958.8; // miles
+  const R = 3958.8;
   const toRad = deg => deg * Math.PI / 180;
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
   const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
             Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
             Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
+  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 }
 
-// Find nearest churches
+// Find nearest churches by ZIP
 async function findChurches() {
-  const address = document.getElementById("address-input").value;
-  if (!address) return alert("Please enter a city or ZIP code.");
+  const zip = document.getElementById("address-input").value.trim();
+  const resultsDiv = document.getElementById("results");
+
+  if (!/^\d{5}$/.test(zip)) {
+    resultsDiv.innerHTML = "<li>Please enter a valid 5-digit ZIP code.</li>";
+    return;
+  }
 
   try {
-    const response = await fetch(`https://geocode.maps.co/search?q=${encodeURIComponent(address)}`);
+    const response = await fetch(
+      `https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_KEY}&q=${zip}&countrycodes=us&format=json&limit=1`
+    );
     const data = await response.json();
-    if (!data.length) return alert("Location not found.");
+    if (!data.length) {
+      resultsDiv.innerHTML = "<li>ZIP code not found.</li>";
+      return;
+    }
 
     const userLat = parseFloat(data[0].lat);
     const userLng = parseFloat(data[0].lon);
 
-    // Sort churches by distance
+    // Sort by distance
     const sorted = churches.map(ch => ({
       ...ch,
       distance: getDistance(userLat, userLng, ch.lat, ch.lng)
     })).sort((a, b) => a.distance - b.distance);
 
     // Show top 10
-    document.getElementById("results").innerHTML = sorted.slice(0, 10)
+    resultsDiv.innerHTML = sorted.slice(0, 10)
       .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a> — ${ch.distance.toFixed(1)} miles</li>`)
       .join("");
 
   } catch (err) {
     console.error("Geocoding error:", err);
-    alert("Error finding location.");
+    resultsDiv.innerHTML = "<li>Error finding location.</li>";
   }
 }
