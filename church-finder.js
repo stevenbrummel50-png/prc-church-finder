@@ -77,7 +77,7 @@ document.getElementById("results").innerHTML = sorted.slice(0, 3)
     <h2>
       <a href="${ch.link}" target="_blank">${ch.name}</a>
       &nbsp;|&nbsp;
-      <a href="${ch.sermons}" target="_blank">Sermons</a>
+      <a href="${ch.sermons}" target="_blank" class="sermons-link">Sermons</a>
     </h2>
   `)
   .join("");
