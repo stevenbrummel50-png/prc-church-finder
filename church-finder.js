@@ -6,14 +6,17 @@ const LOCATIONIQ_KEY = "pk.a421fb4f7cdb6c8f8cb0bbf90f92aba4";
 const churches = [
   { name: "Byron Center PRC", lat: 42.82772167, lng: -85.72487963, link: "https://www.prca.org/churches-missions/byron-center-prc", sermons: "https://www.prca.org/resources/sermons?organization=byron-center-prc" },
   { name: "Doon PRC", lat: 43.28132707998142, lng: -96.22786051534426, link: "https://www.prca.org/churches-missions/doon-prc", sermons: "https://www.prca.org/resources/sermons?organization=doon-prc" },
+  { name: "Crete PRC", lat: 41.45665594900238, lng: -87.57141198636907, link: "https://www.prca.org/churches-missions/crete-prc", sermons: "https://www.prca.org/resources/sermons?organization=crete-prc" },
   { name: "Cornerstone PRC (Dyer, IN)", lat: 41.42038853, lng: -87.49510702, link: "https://www.prca.org/churches-missions/cornerstone-prc-dyer-in", sermons: "https://www.prca.org/resources/sermons?organization=cornerstone-prc-dyer-in" },
   { name: "Faith PRC (Jenison, MI)", lat: 42.89947204, lng: -85.83015205, link: "https://www.prca.org/churches-missions/faith-prc-jenison-mi", sermons: "https://www.prca.org/resources/sermons?organization=faith-prc-jenison-mi" },
   { name: "First PRC (Grand Rapids, MI)", lat: 42.96910651, lng: -85.59974017, link: "https://www.prca.org/churches-missions/first-prc-grand-rapids-mi", sermons: "https://www.prca.org/resources/sermons?organization=first-prc-grand-rapids-mi" },
   { name: "First PRC (Holland, MI)", lat: 42.83495137, lng: -86.04015187, link: "https://www.prca.org/churches-missions/first-prc-holland-mi", sermons: "https://www.prca.org/resources/sermons?organization=first-prc-holland-mi" },
   { name: "Georgetown PRC (Hudsonville, MI)", lat: 42.89846653, lng: -85.90002256, link: "https://www.prca.org/churches-missions/georgetown-prc-hudsonville-mi", sermons: "https://www.prca.org/resources/sermons?organization=georgetown-prc-hudsonville-mi" },
+  { name: "Grace PRC (Hudsonville, MI)", lat: 42.9731706250688, lng: -85.80542271534425, link: "https://www.prca.org/churches-missions/grace-prc-standale-mi", sermons: "https://www.prca.org/resources/sermons?organization=grace-prc-standale-mi" },
   { name: "Grandville PRC", lat: 42.89078801, lng: -85.77032796, link: "https://www.prca.org/churches-missions/grandville-prc", sermons: "https://www.prca.org/resources/sermons?organization=grandville-prc" },
   { name: "Hope PRC (Walker, MI)", lat: 42.9381, lng: -85.7103, link: "https://www.prca.org/churches-missions/hope-prc-walker-mi", sermons: "https://www.prca.org/resources/sermons?organization=hope-prc-walker-mi" },
   { name: "Hudsonville PRC", lat: 42.86108252, lng: -85.85719596, link: "https://www.prca.org/churches-missions/hudsonville-prc", sermons: "https://www.prca.org/resources/sermons?organization=hudsonville-prc" },
+  { name: "Hosanna PRC (Edmonton, AB)", lat: 53.635314066526334, lng: -113.61365694351647, link: "https://www.prca.org/churches-missions/hosanna-prc-edmonton-ab", sermons: "https://www.prca.org/resources/sermons?organization=hosanna-prc-edmonton-ab" },
   { name: "Kalamazoo PRC", lat: 42.29185526, lng: -85.64457334, link: "https://www.prca.org/churches-missions/kalamazoo-prc", sermons: "https://www.prca.org/resources/sermons?organization=kalamazoo-prc" },
   { name: "Providence PRC (Hudsonville, MI)", lat: 42.88522445, lng: -85.82103244, link: "https://www.prca.org/churches-missions/providence-prc-hudsonville-mi", sermons: "https://www.prca.org/resources/sermons?organization=providence-prc-hudsonville-mi" },
   { name: "Southeast PRC (Grand Rapids, MI)", lat: 42.86411607, lng: -85.72396248, link: "https://www.prca.org/churches-missions/southeast-prc-grand-rapids-mi", sermons: "https://www.prca.org/resources/sermons?organization=southeast-prc-grand-rapids-mi" },
@@ -30,6 +33,7 @@ const churches = [
   { name: "Peace PRC", lat: 41.43664561, lng: -87.51385628, link: "https://www.prca.org/churches-missions/peace-prc-dyer-in", sermons: "https://www.prca.org/resources/sermons?organization=peace-prc-dyer-in" },
   { name: "Pittsburgh PRC", lat: 40.41706537, lng: -79.84577336, link: "https://www.prca.org/churches-missions/pittsburgh-prc", sermons: "https://www.prca.org/resources/sermons?organization=pittsburgh-prc" },
   { name: "Randolph PRC", lat: 43.54428987, lng: -90.00347557, link: "https://www.prca.org/churches-missions/randolph-prc", sermons: "https://www.prca.org/resources/sermons?organization=randolph-prc" },
+  { name: "Unity PRC (Byron Center, MI)", lat: 42.82780054357806, lng: -85.72486047962317, link: "https://www.prca.org/churches-missions/unity-prc-byron-center-mi", sermons: "https://www.prca.org/resources/sermons?organization=unity-prc-byron-center-mi" },
   { name: "Zion PRC (Jenison, MI)", lat: 42.90629327, lng: -85.81239838, link: "https://www.prca.org/churches-missions/zion-prc-jenison-mi", sermons: "https://www.prca.org/resources/sermons?organization=zion-prc-jenison-mi" }
 ];
 
