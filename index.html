@@ -5,26 +5,30 @@
 
 <script src="church-finder.js"></script>
 <style>
-  #results {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-  }
+#results h2 {
+  margin: 10px 0;
+  font-size: 1.5em;
+  font-weight: normal;
+}
 
-  #results li {
-    margin-bottom: 10px;
-  }
+#results h2 a {
+  text-decoration: none;
+  color: #003366; /* Church link color */
+  transition: color 0.3s ease;
+}
 
-  #results a {
-    text-decoration: none;
-    color: #003366; /* Dark blue, matching PRCA's link color */
-    font-size: 1.1em;
-    font-weight: normal;
-    transition: color 0.3s ease;
-  }
+#results h2 a:hover {
+  color: #005599;
+}
 
-  #results a:hover {
-    color: #005599; /* Slightly lighter blue on hover */
-  }
+.sermons-link {
+  color: #b8083e; /* PRCA red */
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.sermons-link:hover {
+  color: #8a0630; /* slightly darker on hover */
+}
 </style>
 
