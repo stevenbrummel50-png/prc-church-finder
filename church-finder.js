@@ -5,6 +5,7 @@ const LOCATIONIQ_KEY = "pk.a421fb4f7cdb6c8f8cb0bbf90f92aba4";
 // ===== 2. Churches list =====
 const churches = [
   { name: "Byron Center PRC", lat: 42.82772167, lng: -85.72487963, link: "https://www.prca.org/churches-missions/byron-center-prc", sermons: "https://www.prca.org/resources/sermons?organization=byron-center-prc" },
+  { name: "Doon PRC", lat: 43.28132707998142, lng: -96.22786051534426, link: "https://www.prca.org/churches-missions/doon-prc", sermons: "https://www.prca.org/resources/sermons?organization=doon-prc" },
   { name: "Cornerstone PRC (Dyer, IN)", lat: 41.42038853, lng: -87.49510702, link: "https://www.prca.org/churches-missions/cornerstone-prc-dyer-in", sermons: "https://www.prca.org/resources/sermons?organization=cornerstone-prc-dyer-in" },
   { name: "Faith PRC (Jenison, MI)", lat: 42.89947204, lng: -85.83015205, link: "https://www.prca.org/churches-missions/faith-prc-jenison-mi", sermons: "https://www.prca.org/resources/sermons?organization=faith-prc-jenison-mi" },
   { name: "First PRC (Grand Rapids, MI)", lat: 42.96910651, lng: -85.59974017, link: "https://www.prca.org/churches-missions/first-prc-grand-rapids-mi", sermons: "https://www.prca.org/resources/sermons?organization=first-prc-grand-rapids-mi" },
