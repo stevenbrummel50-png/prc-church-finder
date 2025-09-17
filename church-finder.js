@@ -1,4 +1,8 @@
-// PRC churches with coordinates
+
+// ===== 1. Your LocationIQ API key =====
+const LOCATIONIQ_KEY = "pk.a421fb4f7cdb6c8f8cb0bbf90f92aba4";
+
+// ===== 2. Churches list =====
 const churches = [
   { name: "Byron Center PRC", lat: 42.82772167, lng: -85.72487963, link: "https://www.prca.org/churches-missions/byron-center-prc" },
   { name: "Cornerstone PRC", lat: 41.42038853, lng: -87.49510702, link: "https://www.prca.org/churches-missions/cornerstone-prc" },
@@ -28,57 +32,52 @@ const churches = [
   { name: "Zion PRC", lat: 42.90629327, lng: -85.81239838, link: "https://www.prca.org/churches-missions/zion-prc" }
 ];
 
-// LocationIQ API key
-const LOCATIONIQ_KEY = "pk.a421fb4f7cdb6c8f8cb0bbf90f92aba4";
-
-// Haversine formula for distance (miles)
+// ===== 3. Haversine formula (distance calculator) =====
 function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 3958.8;
+  const R = 3958.8; // miles
   const toRad = deg => deg * Math.PI / 180;
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
   const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
             Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
             Math.sin(dLon/2) * Math.sin(dLon/2);
-  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
 }
 
-// Find nearest churches by ZIP
-async function findChurches() {
-  const zip = document.getElementById("address-input").value.trim();
-  const resultsDiv = document.getElementById("results");
+// ===== 4. Geocoding function (ZIP → lat/lng) =====
+async function geocodeZip(zip) {
+  const url = `https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_KEY}&q=${zip}&countrycodes=us&format=json&limit=1`;
 
-  if (!/^\d{5}$/.test(zip)) {
-    resultsDiv.innerHTML = "<li>Please enter a valid 5-digit ZIP code.</li>";
-    return;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (data && data.length > 0) {
+    return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+  } else {
+    throw new Error("Could not find location for ZIP");
   }
+}
+
+// ===== 5. Main function: find nearest churches =====
+async function findChurches() {
+  const zip = document.getElementById("address-input").value;
+  if (!zip) return alert("Please enter a ZIP code.");
 
   try {
-    const response = await fetch(
-      `https://us1.locationiq.com/v1/search.php?key=${LOCATIONIQ_KEY}&q=${zip}&countrycodes=us&format=json&limit=1`
-    );
-    const data = await response.json();
-    if (!data.length) {
-      resultsDiv.innerHTML = "<li>ZIP code not found.</li>";
-      return;
-    }
+    const { lat: userLat, lng: userLng } = await geocodeZip(zip);
 
-    const userLat = parseFloat(data[0].lat);
-    const userLng = parseFloat(data[0].lon);
-
-    // Sort by distance
     const sorted = churches.map(ch => ({
       ...ch,
       distance: getDistance(userLat, userLng, ch.lat, ch.lng)
     })).sort((a, b) => a.distance - b.distance);
 
-    // Show top 33
-    resultsDiv.innerHTML = sorted.slice(0, 3)
+    document.getElementById("results").innerHTML = sorted.slice(0, 10)
       .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a> — ${ch.distance.toFixed(1)} miles</li>`)
       .join("");
-
   } catch (err) {
-    console.error("Geocoding error:", err);
-    resultsDiv.innerHTML = "<li>Error finding location.</li>";
+    console.error("Error:", err);
+    alert("Error finding location.");
   }
 }
+
