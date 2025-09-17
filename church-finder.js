@@ -67,20 +67,36 @@ async function findChurches() {
   try {
     const { lat: userLat, lng: userLng } = await geocodeZip(zip);
 
-    const sorted = churches.map(ch => ({
-      ...ch,
-      distance: getDistance(userLat, userLng, ch.lat, ch.lng)
-    })).sort((a, b) => a.distance - b.distance);
+    // Compute distances
+    const nearbyChurches = churches
+      .map(ch => ({
+        ...ch,
+        distance: getDistance(userLat, userLng, ch.lat, ch.lng)
+      }))
+      .filter(ch => ch.distance <= 100) // Only within 100 miles
+      .sort((a, b) => a.distance - b.distance);
 
-document.getElementById("results").innerHTML = sorted.slice(0, 3)
-  .map(ch => `
-    <h2>
-      <a href="${ch.link}" target="_blank">${ch.name}</a>
-      &nbsp;|&nbsp;
-      <a href="${ch.sermons}" target="_blank" class="sermons-link">Sermons</a>
-    </h2>
-  `)
-  .join("");
+    const resultsDiv = document.getElementById("results");
+
+    if (nearbyChurches.length === 0) {
+      resultsDiv.innerHTML = `
+        <p>No churches nearby within 100 miles. Please check out our 
+        <a href="https://www.prca.org/churches-missions" target="_blank">live streams & churches</a>.</p>
+      `;
+    } else {
+      resultsDiv.innerHTML = nearbyChurches
+        .slice(0, 3) // show up to 3 nearest
+        .map(ch => `
+          <h2>
+            <a href="${ch.link}" target="_blank">${ch.name}</a>
+            &nbsp;|&nbsp;
+            <a href="${ch.sermons}" target="_blank" class="sermons-link">Sermons</a>
+            &nbsp;(${ch.distance.toFixed(1)} miles)
+          </h2>
+        `)
+        .join("");
+    }
+
   } catch (err) {
     console.error("Error:", err);
     alert("Error finding location.");
