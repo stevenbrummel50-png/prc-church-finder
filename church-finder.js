@@ -72,8 +72,8 @@ async function findChurches() {
       distance: getDistance(userLat, userLng, ch.lat, ch.lng)
     })).sort((a, b) => a.distance - b.distance);
 
-    // Show top 10
-    resultsDiv.innerHTML = sorted.slice(0, 10)
+    // Show top 33
+    resultsDiv.innerHTML = sorted.slice(0, 3)
       .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a> — ${ch.distance.toFixed(1)} miles</li>`)
       .join("");
 
