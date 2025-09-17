@@ -72,7 +72,7 @@ async function findChurches() {
       distance: getDistance(userLat, userLng, ch.lat, ch.lng)
     })).sort((a, b) => a.distance - b.distance);
 
-    document.getElementById("results").innerHTML = sorted.slice(0, 10)
+    document.getElementById("results").innerHTML = sorted.slice(0, 3)
       .map(ch => `<li><a href="${ch.link}" target="_blank">${ch.name}</a> — ${ch.distance.toFixed(1)} miles</li>`)
       .join("");
   } catch (err) {
